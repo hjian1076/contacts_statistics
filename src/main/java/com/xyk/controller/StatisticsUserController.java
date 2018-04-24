@@ -44,14 +44,5 @@ public class StatisticsUserController {
         return ResultUtil.success(pageinfo);
     }
 
-    /**
-     * 跳转到添加联系人页面
-     * @return
-     */
-    @RequestMapping(value = "/addStatisticsUser",method = RequestMethod.GET)
-    public String addStatisticsUser(@RequestParam("p") String p, Model model){
-        System.out.println(p);
-        model.addAttribute("pid",p);
-        return "admin/statisticsUser/addStatisticsList";
-    }
+
 }

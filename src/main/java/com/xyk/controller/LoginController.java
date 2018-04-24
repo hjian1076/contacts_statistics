@@ -1,6 +1,7 @@
 package com.xyk.controller;
 
 import com.xyk.bean.Result;
+import com.xyk.dao.StatisticsUserDao;
 import com.xyk.dao.UserDao;
 import com.xyk.entity.PageRes;
 import com.xyk.entity.User;
@@ -29,8 +30,19 @@ public class LoginController extends BaseController{
     @Autowired
     UserService userService;
     @Autowired
+    StatisticsUserDao statisticsUserDao;
+    @Autowired
     UserDao userDao;
     private Logger logger = Logger.getLogger(LoginController.class);
+
+    /**
+     * 跳转到添加联系人页面
+     * @return
+     */
+    @RequestMapping(value = "/addStatisticsUser",method = RequestMethod.GET)
+    public String addStatisticsUser( ){
+        return "/addStatisticsList";
+    }
     //主页
     @RequestMapping(value = "index",method = RequestMethod.GET)
     public String index(ModelMap model){
