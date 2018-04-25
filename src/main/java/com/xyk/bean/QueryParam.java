@@ -17,7 +17,16 @@ public class QueryParam {
     private String selectType2; //下拉框2
     private String selectType3; //下拉框3
     private String selectType4; //下拉框4
-//
+    private int pfId;
+
+    public int getPfId() {
+        return pfId;
+    }
+
+    public void setPfId(int pfId) {
+        this.pfId = pfId;
+    }
+    //
 //    private Integer groupId;
 //
 //    private String entrance;    //入口,从什么地方进入的

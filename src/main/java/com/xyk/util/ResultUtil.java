@@ -28,5 +28,23 @@ public class ResultUtil {
     public static Result success(){
         return success((Object) null);
     }
+    /**
+     * 返回 错误信息
+     * @param resultEnum 错误信息
+     * @return
+     */
+    public static Result error(ResultEnum resultEnum){
+        return new Result(resultEnum);
+    }
+     /**
+     * 返回错误信息
+     * @param code      错误code
+     * @param msg       错误信息
+     * @param object    错误数据
+     * @return
+     */
+    public static Result error(Integer code, String msg, Object object){
+        return new Result(code,msg,object);
+    }
 
 }

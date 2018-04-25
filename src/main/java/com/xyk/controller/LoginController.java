@@ -1,12 +1,17 @@
 package com.xyk.controller;
 
 import com.xyk.bean.Result;
+import com.xyk.dao.PlatformConfigDaoImpl;
 import com.xyk.dao.StatisticsUserDao;
 import com.xyk.dao.UserDao;
 import com.xyk.entity.PageRes;
+import com.xyk.entity.PlatformConfig;
+import com.xyk.entity.StatisticsUser;
 import com.xyk.entity.User;
 import com.xyk.enums.ResultEnum;
+import com.xyk.service.StatisticsUserService;
 import com.xyk.service.UserService;
+import com.xyk.util.JsonUtil;
 import com.xyk.util.ResultUtil;
 import com.xyk.util.StringUtil;
 import com.xyk.util.memory.MemoryData;
@@ -30,18 +35,59 @@ public class LoginController extends BaseController{
     @Autowired
     UserService userService;
     @Autowired
+    StatisticsUserService statisticsUserService;
+    @Autowired
+    PlatformConfigDaoImpl platformConfigDaoImpl;
+    @Autowired
     StatisticsUserDao statisticsUserDao;
     @Autowired
     UserDao userDao;
     private Logger logger = Logger.getLogger(LoginController.class);
 
     /**
-     * 跳转到添加联系人页面
+     * 跳转到填写联系方式页面
      * @return
      */
-    @RequestMapping(value = "/addStatisticsUser",method = RequestMethod.GET)
-    public String addStatisticsUser( ){
+//    @RequestMapping(value = "/addStatisticsUser")
+//    public String addStatisticsUser( ){
+//        return "/addStatisticsList";
+//    }
+
+    /**
+     * 根据id跳转到指定页面
+     * @param p
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/getPlatformById",method = RequestMethod.GET)
+    public String getPlatformById(@RequestParam("p") Integer p,Model model){
+        model.addAttribute("pid",p);
         return "/addStatisticsList";
+    }
+
+    /**
+     * 添加联系人信息
+     * @param jsonParam
+     * @return
+     */
+    @RequestMapping(value = "/addStaUser",method = RequestMethod.POST)
+    @ResponseBody
+    public Result addStaUser(@RequestParam("person") String person,@RequestParam("iphone") String iphone,@RequestParam("address") String address,@RequestParam("pid") Integer pid){
+        StatisticsUser staUser = new StatisticsUser();
+        staUser.setIphone(iphone);
+        staUser.setPerson(person);
+        staUser.setAddress(address);
+        staUser.setPfId(pid);
+        statisticsUserService.addStatisticsUser(staUser);
+        PlatformConfig platform = platformConfigDaoImpl.findPlatformById(pid);
+        if(platform==null){
+            //跳转到错误页面
+            return ResultUtil.error(ResultEnum.UNKNOW_ERROR.getCode(),"系统错误");
+        }else{
+            String weibist =  platform.getWebsite();
+            return ResultUtil.success(weibist);
+        }
+
     }
     //主页
     @RequestMapping(value = "index",method = RequestMethod.GET)
@@ -53,12 +99,6 @@ public class LoginController extends BaseController{
     // get请求，访问添加用户 页面
     @RequestMapping(value = "/admin/welcome", method = RequestMethod.GET)
     public String welcome() {
-        // 返回 admin/addUser.jsp页面
-//        if(super.checkUserHasRole(RoleEnum.DIAMOND_PROXY.getId())){
-//            model.put("diamond",1);
-//        }else if(super.checkUserHasRole(RoleEnum.DIAMOND_BIG_PROXY.getId())){
-//            model.put("bigDiamond",1);
-//        }
         return "admin/welcome";
     }
     //跳转到登录页面
@@ -176,6 +216,14 @@ public class LoginController extends BaseController{
     public String updatePwdPage(){
         return  "admin/user/updatePwd";
     }
+
+    /**
+     * 修改密码
+     * @param password
+     * @param new_password
+     * @param new_password2
+     * @return
+     */
     @RequestMapping(value = "admin/user/updatePassword",method = RequestMethod.POST)
     @ResponseBody
     public Result updatePwdByUser(String password,String new_password,String new_password2){

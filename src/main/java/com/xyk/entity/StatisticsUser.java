@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "tb_statistics", schema = "ms", catalog = "")
+@Table(name = "tb_statistics_user", schema = "ms", catalog = "")
 public class StatisticsUser {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private int id;
     @Basic
     @Column(name = "person")
     private String person;
@@ -24,14 +24,14 @@ public class StatisticsUser {
     @Column(name = "create_time")
     private Date createTime;
     @Basic
-    @Column(name = "platfrom")
-    private int platfrom;
+    @Column(name = "pf_id")
+    private int pfId;//平台ID
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -67,11 +67,11 @@ public class StatisticsUser {
         this.createTime = createTime;
     }
 
-    public int getPlatfrom() {
-        return platfrom;
+    public int getPfId() {
+        return pfId;
     }
 
-    public void setPlatfrom(int platfrom) {
-        this.platfrom = platfrom;
+    public void setPfId(int pfId) {
+        this.pfId = pfId;
     }
 }
