@@ -25,13 +25,13 @@ public class StatisticsUserDaoImpl {
      */
     public Pageinfo<StatisticsUser> findStatisticsByPage(QueryParam param){
         Pageinfo<StatisticsUser> pageinfo = new Pageinfo<>();
-        String sql = "select tsu.id,tsu.person,tsu.iphone,tsu.address  from tb_statistics_user tsu where 1=1  ";
-        String count_sql = "select count(tsu.id) from tb_statistics_user tsu where 1=1  ";
+        String sql = "select tsu.id,tsu.person,tsu.iphone,tsu.address from tb_statistics_user tsu   where 1=1  ";
+        String count_sql = "select count(tsu.id) from tb_statistics_user tsu  where 1=1  ";
         //开始时间
         //boolean oneDay = beginTime.equals(endTime);//判断是否是一天
-        if(param.getPfId()!=0){
-            sql +=" AND pf.sta_id = " + param.getPfId();
-            count_sql += " AND pf.sta_id = " + param.getPfId();
+        if(param.getPfId()>0){
+            sql +=" AND tsu.pf_id = " + param.getPfId();
+            count_sql += " AND tsu.pf_id = " + param.getPfId();
         }
         if(!StringUtil.isNull(param.getKeyword())){
             String keyword = StringEscapeUtils.escapeSql(param.getKeyword());

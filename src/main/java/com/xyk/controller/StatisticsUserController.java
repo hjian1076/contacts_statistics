@@ -3,7 +3,10 @@ package com.xyk.controller;
 import com.xyk.bean.Pageinfo;
 import com.xyk.bean.QueryParam;
 import com.xyk.bean.Result;
+import com.xyk.dao.PlatformConfigDao;
+import com.xyk.dao.PlatformConfigDaoImpl;
 import com.xyk.dao.StatisticsUserDao;
+import com.xyk.entity.PlatformConfig;
 import com.xyk.entity.StatisticsUser;
 import com.xyk.service.StatisticsUserService;
 import com.xyk.util.ResultUtil;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/admin/statisticsUser")
@@ -23,12 +28,18 @@ public class StatisticsUserController {
     StatisticsUserService statisticsUserService;
     @Autowired
     StatisticsUserDao statisticsUserDao;
+    @Autowired
+    PlatformConfigDaoImpl platformConfigDaoImpl;
+    @Autowired
+    PlatformConfigDao platformConfigDao;
     /**
      * 跳转到信息统计页面
      * @return
      */
     @RequestMapping(value = "/statisticsList",method = RequestMethod.GET)
     public String statisticsList(Model model){
+        List<PlatformConfig> platformList = platformConfigDao.findPlatformList();
+        model.addAttribute("platformList",platformList);
         return "admin/statisticsUser/list";
     }
 
@@ -41,6 +52,11 @@ public class StatisticsUserController {
     @ResponseBody
     public Result getStatisticsAll(QueryParam param){
         Pageinfo<StatisticsUser> pageinfo = statisticsUserService.statisticsList(param);
+        List<StatisticsUser> staUsers = pageinfo.getDataList();
+        for (StatisticsUser staUser: staUsers){
+            PlatformConfig plfo = platformConfigDaoImpl.findPlatformById(staUser.getPfId());
+            staUser.setPlatformName(plfo.getPlatformName());
+        }
         return ResultUtil.success(pageinfo);
     }
 

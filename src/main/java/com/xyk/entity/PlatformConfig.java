@@ -18,17 +18,6 @@ public class PlatformConfig {
     @Basic
     @Column(name = "create_time")
     private Date createTime;//创建时间
-     @Basic
-    @Column(name = "sta_id")
-    private int staId;
-
-    public int getStaId() {
-        return staId;
-    }
-
-    public void setStaId(int staId) {
-        this.staId = staId;
-    }
 
     public int getId() {
         return id;

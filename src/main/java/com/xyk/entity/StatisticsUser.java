@@ -26,6 +26,16 @@ public class StatisticsUser {
     @Basic
     @Column(name = "pf_id")
     private int pfId;//平台ID
+    @Transient
+    private String platformName;//平台名称
+
+    public String getPlatformName() {
+        return platformName;
+    }
+
+    public void setPlatformName(String platformName) {
+        this.platformName = platformName;
+    }
 
     public int getId() {
         return id;

@@ -67,7 +67,7 @@ public class LoginController extends BaseController{
 
     /**
      * 添加联系人信息
-     * @param jsonParam
+     *
      * @return
      */
     @RequestMapping(value = "/addStaUser",method = RequestMethod.POST)

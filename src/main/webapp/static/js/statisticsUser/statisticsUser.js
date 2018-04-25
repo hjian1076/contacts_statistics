@@ -36,7 +36,7 @@ function initTable(){
             align : 'center',
             valign : 'middle'
         }, {
-            field : 'platfrom',
+            field : 'platformName',
             title : '品牌',
             align : 'center',
             valign : 'middle'
@@ -73,6 +73,7 @@ function queryParams(params) {
         beginTime : beginTime,
         endTime : endTime,
         keyword : $("#keyword").val(),  //关键字：联系人名称
+        pfId:$("#pfId").val(),
         limit : params.limit, // 页面大小
         offset : params.offset // 页码
     }

@@ -34,14 +34,14 @@
                         <%--  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 修改--%>
                     <%--</button>--%>
                 <%--</div>--%>
-                <%--<div class="form-group">--%>
-                    <%--<select id="roleId" class="form-control" name="roleId">--%>
-                        <%--<option value="-1">请选择职位</option>--%>
-                        <%--<c:forEach var="role" items="${roles}">--%>
-                            <%--<option value="${role.pkId}">${role.roleName}</option>--%>
-                        <%--</c:forEach>--%>
-                    <%--</select>--%>
-                <%--</div>--%>
+                <div class="form-group">
+                    <select id="pfId" class="form-control" name="pfId">
+                        <option value="-1">请选择品牌</option>
+                        <c:forEach var="platform" items="${platformList}">
+                            <option value="${platform.id}">${platform.platformName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
                     <div class="form-group">
                         <label for="dateTimeRange">日期:</label>
                         <div class="input-group" style="width: 370px;">
