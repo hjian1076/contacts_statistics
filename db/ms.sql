@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2018-04-24 19:14:04
+Date: 2018-04-25 20:39:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,30 +47,32 @@ CREATE TABLE `tb_platform_config` (
   `website` varchar(1000) DEFAULT NULL COMMENT '官网地址',
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tb_platform_config
 -- ----------------------------
+INSERT INTO `tb_platform_config` VALUES ('1', '百度', 'http://news.baidu.com/', '2018-04-25 17:14:42');
+INSERT INTO `tb_platform_config` VALUES ('2', 'CSDN', 'https://blog.csdn.net/a379850992/article/details/54288595', '2018-04-25 19:03:07');
 
 -- ----------------------------
 -- Table structure for `tb_statistics_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_statistics_user`;
 CREATE TABLE `tb_statistics_user` (
-  `id` bigint(36) NOT NULL AUTO_INCREMENT,
+  `id` int(36) NOT NULL AUTO_INCREMENT,
   `person` varchar(20) NOT NULL,
   `iphone` varchar(11) NOT NULL,
   `address` varchar(50) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
-  `platfrom` int(11) NOT NULL,
+  `pf_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tb_statistics_user
 -- ----------------------------
-INSERT INTO `tb_statistics_user` VALUES ('1', 'aaaa', '11111111111', '11111', '2018-04-24 15:51:14', '0');
+INSERT INTO `tb_statistics_user` VALUES ('1', 'aaaa', '11111111111', '11111', '2018-04-24 15:51:14', '1');
 INSERT INTO `tb_statistics_user` VALUES ('2', 'bbbbb', '22222222222', '22222', '2018-04-11 12:51:44', '0');
 INSERT INTO `tb_statistics_user` VALUES ('3', 'ccccc', '33333333333', '33333', '2018-04-12 15:52:06', '0');
 INSERT INTO `tb_statistics_user` VALUES ('4', 'ddddd', '11223344551', '21311', '2018-04-18 15:52:25', '0');
@@ -81,6 +83,17 @@ INSERT INTO `tb_statistics_user` VALUES ('8', 'aswwa', '12312312312', '2122', '2
 INSERT INTO `tb_statistics_user` VALUES ('9', '2112', '44422244422', '121222', '2018-04-14 15:54:14', '0');
 INSERT INTO `tb_statistics_user` VALUES ('10', '1212', '33333333332', '11222', '2018-04-13 15:54:29', '0');
 INSERT INTO `tb_statistics_user` VALUES ('11', '12222', '22222222212', '22112', '2018-04-11 15:54:44', '0');
+INSERT INTO `tb_statistics_user` VALUES ('12', '12121', 'ssss', 'saaaa', '2018-04-25 19:33:31', '1');
+INSERT INTO `tb_statistics_user` VALUES ('13', '', '', '', '2018-04-25 19:58:54', '1');
+INSERT INTO `tb_statistics_user` VALUES ('14', '', '', '', '2018-04-25 19:59:04', '2');
+INSERT INTO `tb_statistics_user` VALUES ('15', 'dad', '', '', '2018-04-25 20:01:49', '2');
+INSERT INTO `tb_statistics_user` VALUES ('16', '', 'sss', '', '2018-04-25 20:11:01', '2');
+INSERT INTO `tb_statistics_user` VALUES ('17', '', '1212', '', '2018-04-25 20:12:07', '2');
+INSERT INTO `tb_statistics_user` VALUES ('18', '', 'sdsd', '', '2018-04-25 20:13:47', '2');
+INSERT INTO `tb_statistics_user` VALUES ('19', 'sdsd', '15213425633', 'dsadas', '2018-04-25 20:18:48', '2');
+INSERT INTO `tb_statistics_user` VALUES ('20', 'sdsd', '15213425633', 'dsadas', '2018-04-25 20:21:41', '2');
+INSERT INTO `tb_statistics_user` VALUES ('21', 'dsds', '15213425633', '21212313', '2018-04-25 20:22:20', '1');
+INSERT INTO `tb_statistics_user` VALUES ('22', '1212', '15213425633', 'dsadsad', '2018-04-25 20:29:34', '1');
 
 -- ----------------------------
 -- Table structure for `tb_user`
