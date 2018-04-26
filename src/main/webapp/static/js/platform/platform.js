@@ -18,6 +18,11 @@ function initTable(){
     //var showExport = false;
     var columns = [
         {
+            field : '',
+            title : '',
+            checkbox: true
+        },
+        {
             field : 'id',
             title : '品牌ID',
             align : 'center',

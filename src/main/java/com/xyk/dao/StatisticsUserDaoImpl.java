@@ -25,7 +25,7 @@ public class StatisticsUserDaoImpl {
      */
     public Pageinfo<StatisticsUser> findStatisticsByPage(QueryParam param){
         Pageinfo<StatisticsUser> pageinfo = new Pageinfo<>();
-        String sql = "select tsu.id,tsu.person,tsu.iphone,tsu.address,tsu.create_time,tpf.platform_name from tb_statistics_user tsu left join tb_platform_config tpf on tsu.pf_id=tpf.id  where 1=1  ";
+        String sql = "select tsu.id,tsu.person,tsu.iphone,tsu.address,tsu.birth_date,tsu.create_time,tpf.platform_name from tb_statistics_user tsu left join tb_platform_config tpf on tsu.pf_id=tpf.id  where 1=1  ";
         String count_sql = "select count(tsu.id) from tb_statistics_user tsu left join tb_platform_config tpf on tsu.pf_id=tpf.id  where 1=1  ";
         //开始时间
         //boolean oneDay = beginTime.equals(endTime);//判断是否是一天

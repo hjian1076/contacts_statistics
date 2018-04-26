@@ -34,6 +34,9 @@
                   <button type="button" onclick="openUpdateWin()"  class="btn btn-primary">
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 修改
                     </button>
+                    <button id="btn_delete" type="button" onclick="deletePf()" class="btn btn-primary">
+                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                    </button>
                 </div>
             </div>
         </div>
@@ -56,7 +59,6 @@
 </body>
 
     <script>
-        var path = "<%=websiteBasePath%>";
         $(function () {
             common.initDateTimeRange();
         })
@@ -87,10 +89,44 @@
                 layer.msg("只能选中一条数据进行修改");
                 return false;
             }
-            openInputWin('/admin/platform/updatePage?id='+row[0],'修改用户');
+            openInputWin('/admin/platform/updatePage?id='+row[0],'修改品牌信息');
         }
 
-
+        function deletePf() {
+            var row = $.map($("#demo-table").bootstrapTable('getSelections'),function(row){
+                return row.pfId ;
+            });
+            if(row.length==0){
+                layer.msg("请选择需要删除的数据");
+                return false;
+            }
+            if(row.length>1){
+                layer.msg("只能选中一条数据进行删除");
+                return false;
+            }
+            $.ajax({
+                url:'/admin/platform/delete',
+                type:'POST', //GET
+                async:false,    //或false,是否异步
+                data:{
+                    pfId:pfId
+                },
+                timeout:5000,    //超时时间
+                dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                success:function(data,textStatus,jqXHR){
+                   // console.log(data);
+                    layer.msg(data.msg);
+                    if(data.code==0){
+                        $('#demo-table').bootstrapTable('refresh');    //刷新表格
+                    }
+                },
+                error:function(xhr,textStatus){
+                    console.log('错误')
+                    console.log(xhr)
+                    console.log(textStatus)
+                }
+            })
+        }
 
     </script>
 

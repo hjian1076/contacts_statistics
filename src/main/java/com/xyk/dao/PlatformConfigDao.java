@@ -19,6 +19,17 @@ public interface PlatformConfigDao extends PagingAndSortingRepository<PlatformCo
      */
     @Query(value = "select pf.* from  tb_platform_config pf",nativeQuery = true)
     List<PlatformConfig> findPlatformList();
+
+    /**
+     * 修改信息
+     */
+    @Query(value = "update tb_platform_config pf SET pf.platform_name=?1,pf.website=?2 where pf.id=?3",nativeQuery = true)
+    void updatePlatformById(String platformName,String website,int id);
+    /**
+     * 删除信息
+     */
+    @Query(value = "DELETE FROM tb_platform_config pf where pf.id=?1",nativeQuery = true)
+    void deletePlatformById(int id);
 //    /**
 //     * 添加平台信息
 //     */

@@ -20,13 +20,13 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">品牌名称<span style="color: red;">*</span></label>
                             <div class="col-sm-8">
-                                <input  ng-model="param.platformName" type="text" class="form-control">
+                                <input  ng-model="platform.platformName" type="text" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">品牌地址<span style="color: red;">*</span></label>
                             <div class="col-sm-8">
-                                <input  ng-model="param.website"  type="text" class="form-control">
+                                <input  ng-model="platform.website"  type="text" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -60,7 +60,7 @@
             $scope.platform = angular.fromJson('${platform}');
             $scope.url = "/admin/platform/update";
         }else{
-            $scope.user = {
+            $scope.platform = {
                 platformName:'',
                 website:'',
             };
@@ -70,22 +70,22 @@
         //保存
         $scope.save = function(){
 
-            if(isNull($scope.param.platformName)){
+            if(isNull($scope.platform.platformName)){
                 layer.msg("请输入平台名称");
                 return false;
             }
-            if(isNull($scope.param.website)){
+            if(isNull($scope.platform.website)){
                 layer.msg("请输入平台网址");
                 return false;
             }
-            if(!validateWebsite($scope.param.website)){
+            if(!validateWebsite($scope.platform.website)){
                 layer.msg("输入的网址格式不正确");
                 return false;
             }
             $('#subBtn')[0].disabled = true;
-
+            var jsonStr = angular.toJson($scope.platform,true);
             //提交数据
-            $http({method : 'POST', data:$scope.param, url : $scope.url})
+            $http({method : 'POST', data:{jsonParam:jsonStr}, url : $scope.url})
                 .success(function(data,status,headers,config){
                     //console.log(data);
                     $('#subBtn')[0].disabled = false;

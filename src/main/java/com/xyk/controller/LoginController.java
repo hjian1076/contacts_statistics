@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -72,11 +73,12 @@ public class LoginController extends BaseController{
      */
     @RequestMapping(value = "/addStaUser",method = RequestMethod.POST)
     @ResponseBody
-    public Result addStaUser(@RequestParam("person") String person,@RequestParam("iphone") String iphone,@RequestParam("address") String address,@RequestParam("pid") Integer pid){
+    public Result addStaUser(@RequestParam("person") String person, @RequestParam("iphone") String iphone, @RequestParam("address") String address, @RequestParam("birthDate") Date birthDate, @RequestParam("pid") Integer pid){
         StatisticsUser staUser = new StatisticsUser();
         staUser.setIphone(iphone);
         staUser.setPerson(person);
         staUser.setAddress(address);
+        staUser.setBirthDate(birthDate);
         staUser.setPfId(pid);
         statisticsUserService.addStatisticsUser(staUser);
         PlatformConfig platform = platformConfigDaoImpl.findPlatformById(pid);

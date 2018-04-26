@@ -18,4 +18,8 @@ public interface PlatformConfigService {
      * @return
      */
     Pageinfo<PlatformConfig> findPlatformList(QueryParam param);
+    /**
+     * 修改信息
+     */
+    void updatePlatform(PlatformConfig pf);
 }
