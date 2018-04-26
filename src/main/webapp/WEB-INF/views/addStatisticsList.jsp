@@ -23,7 +23,11 @@
 </head>
 <body class="gray-bg">
 
+
     <div ng-app="myApp" ng-controller="addController"  class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <h3>请完善联系人信息</h3>
+        </div>
         <div>
             <form class="m-t">
                 <div class="form-group">

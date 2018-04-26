@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,7 +22,7 @@
 
 
 <script src="<%=basePath%>static/js/layer/laydate/laydate.js"></script>
-<script src="<%=basePath%>static/plugins/layer/layer.js"></script>
+<script src="<%=basePath%>static/js/plugins/layer/layer.js"></script>
 <%--<script src="<%=basePath%>static/plugins/layer/mobile/layer.js"></script>--%>
 
 <script src="<%=basePath%>static/js/util.js?rand=<%=rand%>"></script>

@@ -53,8 +53,8 @@
 <!-- 导入尾部公共js -->
 <jsp:include page="/template/tail.jsp" />
 <!-- Sweet Alert -->
-<link href="<%=basePath%>static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-<script src="<%=basePath%>static/js/plugins/sweetalert/sweetalert.min.js"></script>
+<link href="<%=basePath%>static/css/sweetalert.css" rel="stylesheet">
+    <script src="<%=basePath%>static/js/sweetalert.min.js"></script>
 </body>
 
 </html>

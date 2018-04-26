@@ -34,7 +34,7 @@ public class StatisticsUserServiceImpl implements StatisticsUserService {
     public void addStatisticsUser(StatisticsUser staUser) {
         Date createTime = new Date();
         staUser.setCreateTime(createTime);
-         statisticsUserDao.save(staUser);
+        statisticsUserDao.save(staUser);
     }
 
     /**

@@ -54,8 +54,12 @@ public class StatisticsUserController {
         Pageinfo<StatisticsUser> pageinfo = statisticsUserService.statisticsList(param);
         List<StatisticsUser> staUsers = pageinfo.getDataList();
         for (StatisticsUser staUser: staUsers){
-            PlatformConfig plfo = platformConfigDaoImpl.findPlatformById(staUser.getPfId());
-            staUser.setPlatformName(plfo.getPlatformName());
+            if(staUser.getId()>0){
+                PlatformConfig plfo = platformConfigDao.findPfById(staUser.getPfId());
+                if(plfo!=null){
+                    staUser.setPlatformName(plfo.getPlatformName());
+                }
+            }
         }
         return ResultUtil.success(pageinfo);
     }

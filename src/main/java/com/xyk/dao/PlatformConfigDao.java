@@ -12,11 +12,16 @@ import java.util.List;
 
 @Repository
 public interface PlatformConfigDao extends PagingAndSortingRepository<PlatformConfig,Long>,JpaSpecificationExecutor<PlatformConfig>{
-    @Query(value = "select pf.* from tb_platform_config pf left join tb_statistics_user stu on pf.id = stu.pf_id where stu.pf_id = ?1",nativeQuery = true)
+    @Query(value = "select pf.* from tb_platform_config pf  where pf.id = ?1",nativeQuery = true)
     PlatformConfig findPfById(int pfId);
     /**
      * 查询所有信息
      */
-    @Query("select pf from  PlatformConfig pf")
+    @Query(value = "select pf.* from  tb_platform_config pf",nativeQuery = true)
     List<PlatformConfig> findPlatformList();
+//    /**
+//     * 添加平台信息
+//     */
+//    @Query(value = "insert into tb_platform_config(platform_name,website,create_time) values(?1,?2,?3)",nativeQuery = true)
+//    void addPlatform(String platformName,String website,Date createTime);
 }

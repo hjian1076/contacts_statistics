@@ -39,31 +39,6 @@
                     </div>
                 </li>
                 <c:forEach var="res" items="${user.resList}">
-                    <%--<c:if test="${res.resType==0}">--%>
-                        <%--<!-- 功能菜单 -->--%>
-                        <%--<li>--%>
-                            <%--<a href="#">--%>
-                                <%--<span class="nav-label">${res.resName}</span>--%>
-                                <%--<span class="fa arrow"></span>--%>
-                            <%--</a>--%>
-                            <%--<ul class="nav nav-second-level">--%>
-                                <%--<c:forEach var="res2" items="${res.childList}">--%>
-                                    <%--<c:if test="${res2.resType==0}">--%>
-                                        <%--<li>--%>
-                                            <%--<a href="#">${res2.resName} <span class="fa arrow"></span></a>--%>
-                                        <%--</li>--%>
-                                    <%--</c:if>--%>
-                                    <%--<c:if test="${res2.resType==1}">--%>
-                                        <%--<!-- 功能点 -->--%>
-                                        <%--<li>--%>
-                                            <%--<a class="J_menuItem" href="${res2.resUrl}">${res2.resName}</a>--%>
-                                        <%--</li>--%>
-                                    <%--</c:if>--%>
-                                <%--</c:forEach>--%>
-
-                            <%--</ul>--%>
-                        <%--</li>--%>
-                    <%--</c:if>--%>
                     <c:if test="${res.resType==1}">
                         <!-- 功能点 -->
                         <li>
@@ -91,10 +66,6 @@
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
                         <i class="fa fa-bars"></i>
                     </a>
-
-                    <a onclick="refresh();" class="minimalize-styl-2 btn btn-primary " href="#">
-                        <i class="fa fa-refresh"></i>
-                    </a>
                 </div>
             </nav>
         </div>
@@ -108,21 +79,6 @@
             </nav>
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
             </button>
-            <div class="btn-group roll-nav roll-right">
-                <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
-
-                </button>
-                <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                    <li class="J_tabShowActive"><a>定位当前选项卡</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
-                    </li>
-                    <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
-                    </li>
-                </ul>
-            </div>
-            <a href="/loginOut" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${welcomePage}" frameborder="0" data-id="${welcomePage}" seamless></iframe>
@@ -134,27 +90,20 @@
     <!--右侧边栏结束-->
     <script src="<%=basePath%>static/js/jquery.min.js?v=2.1.4"></script>
     <script src="<%=basePath%>static/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="<%=basePath%>static/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="<%=basePath%>static/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="<%=basePath%>static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="<%=basePath%>static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="<%=basePath%>static/js/layer/layer.min.js"></script>
     <script src="<%=basePath%>static/js/hplus.min.js?v=4.1.0"></script>
     <script type="text/javascript" src="<%=basePath%>static/js/contabs.min.js"></script>
-    <script src="<%=basePath%>static/plugins/pace/pace.min.js"></script>
+    <script src="<%=basePath%>static/js/plugins/pace/pace.min.js"></script>
 
     <!-- Sweet Alert -->
-    <link href="<%=basePath%>static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <script src="<%=basePath%>static/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <link href="<%=basePath%>static/css/sweetalert.css" rel="stylesheet">
+    <script src="<%=basePath%>static/js/sweetalert.min.js"></script>
 
 
 </body>
 
-<script>
-    //刷新子页面
-    function refresh(){
-        var iframe = $("iframe:visible")[0];
-        iframe.src = iframe.src;
-    }
-</script>
 
 </html>
 

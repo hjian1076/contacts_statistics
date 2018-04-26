@@ -212,6 +212,20 @@ function validatemobile(mobile){
 }
 
 /**
+ * 验证网址
+ * @param website
+ */
+function validateWebsite(website) {
+    if(isNull(website)){
+        return false;
+    }
+    var myreg = /^[hH][tT][tT][pP]([sS]?):\/\/(\S+\.)+\S{2,}$/;
+    if(!myreg.test(website)){
+        return false;
+    }
+    return true;
+}
+/**
  * 验证邮箱
  * @param email
  * @return is email return true else return false

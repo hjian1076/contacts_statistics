@@ -18,7 +18,7 @@
     <title>联系人信息统计</title>
 
     <link rel="stylesheet" href="<%=basePath%>static/css/plugins/bootstrap-table/bootstrap-table.min.css">
-    <link rel="stylesheet" href="<%=basePath%>static/plugins/daterangepicker/css/daterangepicker.css" />
+    <link rel="stylesheet" href="<%=basePath%>static/js/plugins/daterangepicker/css/daterangepicker.css" />
     <jsp:include page="/template/header.jsp" />
     <!--头部结束-->
 </head>
@@ -70,12 +70,12 @@
 
     <jsp:include page="/template/list_tail.jsp" />
     <script src="<%=basePath%>static/js/statisticsUser/statisticsUser.js?rand=<%=rand%>"></script>
-    <script src="<%=basePath%>static/plugins/daterangepicker/js/common.js"></script>
-    <script src="<%=basePath%>static/plugins/daterangepicker/js/date-time/moment.js?ver=1" type="text/javascript"></script>
-    <script src="<%=basePath%>static/plugins/daterangepicker/js/date-time/daterangepicker.zh-CN.js?ver=1" type="text/javascript"></script>
-    <script src="<%=basePath%>static/plugins/daterangepicker/js/date-time/daterangepicker.js?ver=1" type="text/javascript"></script>
-    <script src="<%=basePath%>static/plugins/angular/angular.min.js"></script>
-    <script src="<%=basePath%>static/plugins/angular/app.js"></script>
+    <script src="<%=basePath%>static/js/plugins/daterangepicker/js/common.js"></script>
+    <script src="<%=basePath%>static/js/plugins/daterangepicker/js/date-time/moment.js?ver=1" type="text/javascript"></script>
+    <script src="<%=basePath%>static/js/plugins/daterangepicker/js/date-time/daterangepicker.zh-CN.js?ver=1" type="text/javascript"></script>
+    <script src="<%=basePath%>static/js/plugins/daterangepicker/js/date-time/daterangepicker.js?ver=1" type="text/javascript"></script>
+    <script src="<%=basePath%>static/js/plugins/angular/angular.min.js"></script>
+    <script src="<%=basePath%>static/js/plugins/angular/app.js"></script>
 </body>
 
     <script>
