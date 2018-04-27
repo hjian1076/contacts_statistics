@@ -14,9 +14,9 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-   public UserDao userDao;
+    UserDao userDao;
     @Autowired
-    PageResDaoImpl pageResDao;
+    public PageResDaoImpl pageResDao;
     @Override
     public User login(String username, String password) {
         //密码加密
