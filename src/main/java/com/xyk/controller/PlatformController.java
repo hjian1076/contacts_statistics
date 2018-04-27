@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -54,26 +55,21 @@ public class PlatformController {
 
     }
     /**
-     * 添加平台
-     * @param platformName 平台名称
-     * @param website 平台地址
+     * 添加品牌
      * @return
      */
     @RequestMapping(value = "/add")
     @ResponseBody
-    public Result add(@RequestParam("platformName") String platformName,@RequestParam("website") String website){
-        PlatformConfig pf = new PlatformConfig();
-        pf.setPlatformName(platformName);
-        pf.setWebsite(website);
-        if(StringUtil.isNull(platformName)){
-            return ResultUtil.error(ResultEnum.PARAM_ERROR.getCode(),"平台名称不能为空");
+    public Result add(String jsonParam){
+        PlatformConfig platform = JsonUtil.GSON.fromJson(jsonParam, PlatformConfig.class);
+        if(StringUtil.isNull(platform.getPlatformName())){
+            return ResultUtil.error(ResultEnum.PARAM_ERROR.getCode(),"品牌名称不能为空");
         }
-        if(StringUtil.isNull(website)){
-            return ResultUtil.error(ResultEnum.PARAM_ERROR.getCode(),"平台地址不能为空");
+        if(StringUtil.isNull(platform.getWebsite())){
+            return ResultUtil.error(ResultEnum.PARAM_ERROR.getCode(),"品牌地址不能为空");
         }
-        if(pf!=null){
-            platformConfigService.addPlatform(pf);
-        }
+        platformConfigService.validatePlatformUnique(platform);
+        platformConfigService.addPlatform(platform);
         return ResultUtil.success();
     }
 
@@ -85,7 +81,7 @@ public class PlatformController {
      * @return
      */
     @RequestMapping(value = "/updatePage")
-    public String updatePage(String id, Model model){
+    public String updatePage(@RequestParam("id") String id, Model model){
         int pfId = Integer.valueOf(id);
         PlatformConfig platform = platformConfigDao.findPfById(pfId);
         model.addAttribute("platform",JsonUtil.toJsonByGson(platform));
@@ -98,22 +94,20 @@ public class PlatformController {
      * @param jsonParam
      * @return
      */
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
     @ResponseBody
     public  Result updatePlatform(String jsonParam){
         PlatformConfig platform = JsonUtil.GSON.fromJson(jsonParam, PlatformConfig.class);
-        if(platform == null) return ResultUtil.error(ResultEnum.PARAM_ERROR);
         platformConfigService.updatePlatform(platform);
         return ResultUtil.success();
     }
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public Result deletePlatform(@RequestParam("pfId") String pfId){
-        if(StringUtil.isNull(pfId)){
+    public Result deletePlatform(@RequestParam("pfIds[]") Integer[] pfIds){
+        if(pfIds==null || pfIds.length==0){
             return ResultUtil.error(ResultEnum.PARAM_ERROR);
         }
-        int id = Integer.valueOf(pfId);
-        platformConfigDao.deletePlatformById(id);
+        platformConfigService.deletePlatformByIdS(pfIds);
         return ResultUtil.success();
     }
 }

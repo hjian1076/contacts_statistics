@@ -72,11 +72,4 @@ public class StatisticsUserDaoImpl {
         return  pageinfo;
     }
 
-//    /**
-//     * 保存联系信息
-//     * @param id
-//     */
-//    public void addStaUserById(int id){
-//        String sql = "insert into tb_statistics_user tsu tsu.person,tsu.iphone,tsu.address values"
-//    }
 }

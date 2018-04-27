@@ -62,6 +62,7 @@ public class DBHelperUtil {
      */
     public static List fillDataInfo(List datalist, Class clss) throws Exception {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         List list = new ArrayList();
         Map row = null;
         Field[] declaredFields = null;
@@ -111,6 +112,7 @@ public class DBHelperUtil {
                 }else if(fieldTypeName.indexOf("Date")  != -1 ){
                     try {
                         if(val != null && !"".equals(val.toString())){
+                           // if(DateUtil.isValidDate())
                             field.set(temp, format.parse(val.toString()));
                         }else {
                             field.set(temp, null);

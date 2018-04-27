@@ -13,8 +13,8 @@ import java.util.List;
 public interface StatisticsUserDao extends PagingAndSortingRepository<StatisticsUser,Long>,JpaSpecificationExecutor<StatisticsUser> {
 //    @Query("select su.id,su.person,su.iphone,su.address,su.createTime,su.platfrom from StatisticsUser  su ")
 //    public List<StatisticsUser> statisticsList();
-    @Query(value = "INSERT INTO tb_statistics_user (person,iphone,address,create_time,pf_id) values(?1,?2,?3,?4,?5)",nativeQuery = true)
-    void addStatisticsUser(String person, String iphone, String address, Date createTime,int pfId);
+    @Query(value = "INSERT INTO tb_statistics_user (person,iphone,address,birth_date,create_time,pf_id) values(?1,?2,?3,?4,?5,?6)",nativeQuery = true)
+    void addStatisticsUser(String person, String iphone, String address,Date birthDate, Date createTime,int pfId);
 
     /**
      * 根据手机号查询用户
@@ -22,4 +22,10 @@ public interface StatisticsUserDao extends PagingAndSortingRepository<Statistics
      */
     @Query("select u from StatisticsUser u where u.iphone = ?1" )
     public StatisticsUser findStaUserByIphone(String iphone);
+    /**
+     * 根据联系人名称查询用户
+     * @return
+     */
+    @Query("select u from StatisticsUser u where u.person = ?1" )
+    public StatisticsUser findStaUserByPerson(String person);
 }

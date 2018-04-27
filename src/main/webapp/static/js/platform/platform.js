@@ -59,9 +59,6 @@ function initTable(){
     ];
     tableUtil.initTable(table,url,columns);
 }
-function openCode(id) {
-
-}
 function createCode(id) {
 
         var html = '<div id="qrcode" class="ibox-content" style="align-content: center">'+'</div>';
@@ -71,33 +68,14 @@ function createCode(id) {
                 skin: 'layui-layer-rim', //加上边框
                 area: ['300px', '330px'], //宽高
                 content: html})
-        var qcodepath = path+"/getPlatformById?p="+id;
+        console.log(webPath);
+        var qcodepath = webPath+"/getPlatformById?p="+id;
+        console.log(qcodepath);
         var qrcode = new QRCode(document.getElementById("qrcode"), {
             width : 200,
             height : 200
         });
         qrcode.makeCode(qcodepath);
-    // $.ajax({
-    //     url:'admin/platform/createCode',
-    //     type:'POST',
-    //     async:false,
-    //     data:{
-    //         id:id
-    //     },
-    //     timeout:5000,
-    //     dataType:'json',
-    //     success:function (data,textStatus,jqXHR) {
-    //         layer.msg(data.msg);
-    //         if(data.code==0){
-    //             alert(data.msg);
-    //         }
-    //     },
-    //     error:function(xhr,textStatus){
-    //         console.log('错误')
-    //         console.log(xhr)
-    //         console.log(textStatus)
-    //     }
-    // })
 }
 
 function queryParams(params) {

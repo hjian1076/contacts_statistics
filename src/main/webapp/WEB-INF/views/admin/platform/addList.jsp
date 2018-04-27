@@ -49,7 +49,7 @@
 <!-- 导入尾部公共js -->
 <jsp:include page="/template/tail.jsp" />
 <script>
-//    $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
+    $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
 
     app.controller('addPlatformController', function($scope,$http) {
 
@@ -71,11 +71,11 @@
         $scope.save = function(){
 
             if(isNull($scope.platform.platformName)){
-                layer.msg("请输入平台名称");
+                layer.msg("请输入品牌名称");
                 return false;
             }
             if(isNull($scope.platform.website)){
-                layer.msg("请输入平台网址");
+                layer.msg("请输入品牌网址");
                 return false;
             }
             if(!validateWebsite($scope.platform.website)){
@@ -84,12 +84,14 @@
             }
             $('#subBtn')[0].disabled = true;
             var jsonStr = angular.toJson($scope.platform,true);
+            console.log(jsonStr);
             //提交数据
             $http({method : 'POST', data:{jsonParam:jsonStr}, url : $scope.url})
                 .success(function(data,status,headers,config){
                     //console.log(data);
                     $('#subBtn')[0].disabled = false;
                     layer.msg(data.msg);
+                    console.log(data);
                     if(data.code==0){
                         alert(data.msg);
                         parent.closeWinAndFlush();

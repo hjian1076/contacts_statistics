@@ -11,6 +11,7 @@ import com.xyk.entity.User;
 import com.xyk.enums.ResultEnum;
 import com.xyk.service.StatisticsUserService;
 import com.xyk.service.UserService;
+import com.xyk.util.DateUtil;
 import com.xyk.util.JsonUtil;
 import com.xyk.util.ResultUtil;
 import com.xyk.util.StringUtil;
@@ -73,13 +74,14 @@ public class LoginController extends BaseController{
      */
     @RequestMapping(value = "/addStaUser",method = RequestMethod.POST)
     @ResponseBody
-    public Result addStaUser(@RequestParam("person") String person, @RequestParam("iphone") String iphone, @RequestParam("address") String address, @RequestParam("birthDate") Date birthDate, @RequestParam("pid") Integer pid){
+    public Result addStaUser(@RequestParam("person") String person, @RequestParam("iphone") String iphone,@RequestParam("birthDate") String birthDate,@RequestParam("address") String address, @RequestParam("pid") Integer pid){
         StatisticsUser staUser = new StatisticsUser();
         staUser.setIphone(iphone);
         staUser.setPerson(person);
         staUser.setAddress(address);
-        staUser.setBirthDate(birthDate);
+        staUser.setBirthDate(DateUtil.stringToDate(birthDate,"yyyy-MM-dd"));
         staUser.setPfId(pid);
+        statisticsUserService.validateStaUserUnique(staUser);
         statisticsUserService.addStatisticsUser(staUser);
         PlatformConfig platform = platformConfigDaoImpl.findPlatformById(pid);
         if(platform==null){

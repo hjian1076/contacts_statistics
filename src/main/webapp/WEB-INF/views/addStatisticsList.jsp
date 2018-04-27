@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hejx
-  Date: 2017/5/19
-  Time: 15:42
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -26,7 +20,7 @@
 
     <div ng-app="myApp" ng-controller="addController"  class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
-            <h3>请完善联系人信息</h3>
+            <h2>免费领机</h2>
         </div>
         <div>
             <form class="m-t">
@@ -36,6 +30,22 @@
                  <div class="form-group">
                     <input type="text" maxlength="11" class="form-control"  ng-model="param.iphone"  placeholder="联系人电话">
                 </div>
+                 <div class="form-group">
+                                            <div class="input-group" >
+                                                <input class="form-control date-picker" name="dateTimeRange"  ng-model="param.birthDate" placeholder="出生年月"  readonly id="dateTimeRange" value="" type="text">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-calendar bigger-110"></i>
+                                            </span>
+                                            </div>
+                     <%--<div class="input-group">--%>
+                          <%--<input class="form-control date-picker" name="dateTimeRange" readonly id="dateTimeRange" value="" type="text">--%>
+                        <%--&lt;%&ndash;//   <input class="form-control date-picker" name="dateTimeRange" ng-model="param.birthDate" placeholder="出生年月" readonly id="dateTimeRange" value="" type="text">&ndash;%&gt;--%>
+                           <%--<span class="input-group-addon">--%>
+                            <%--<i class="fa fa-calendar bigger-110"></i>--%>
+                        <%--</span>--%>
+                    <%--</div>--%>
+                </div>
+
                 <div class="form-group">
                     <input type="text" class="form-control"  ng-model="param.address"  placeholder="联系人地址">
                 </div>
@@ -50,9 +60,51 @@
     <!-- Sweet Alert -->
     <link href="<%=basePath%>static/css/sweetalert.css" rel="stylesheet">
     <script src="<%=basePath%>static/js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="<%=basePath%>static/js/plugins/datepicker/css/bootstrap-datepicker.css" />
+    <script src="<%=basePath%>static/js/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="<%=basePath%>static/js/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
+    <script src="<%=basePath%>static/js/plugins/angular/angular.min.js"></script>
+    <script src="<%=basePath%>static/js/plugins/angular/app.js"></script>
 </body>
 <script>
-
+       $(function () {
+            common.initSingleDateRange();
+        })
+//      $('#birthDate .input-group.date').datepicker({
+//            startView: 2,
+//            maxViewMode: 2,
+//            language: "zh-CN"
+//      });
+//    $.fn.datepicker.dates['cn'] = {   //切换为中文显示
+//    days: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+//            daysShort: ["日", "一", "二", "三", "四", "五", "六", "七"],
+//            daysMin: ["日", "一", "二", "三", "四", "五", "六", "七"],
+//            months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+//            monthsShort: ["1月  ", "2月  ", "3月  ", "4月  ", "5月  ", "6月  ", "7月  ", "8月  ", "9月  ", "10月  ", "11月  ", "12月  "],
+//            today: "今天",
+//            clear: "清除"
+//    };
+//    $('.selectDate').datepicker({
+//        autoclose:true,
+//        beforeShowDay: $.noop,    //在显示日期之前调用的函数
+//        calendarWeeks: false,     //是否显示今年是第几周
+//        clearBtn: false,          //显示清除按钮
+//        daysOfWeekDisabled: [],   //星期几不可选
+//        endDate: Infinity,        //日历结束日期
+//        forceParse: true,         //是否强制转换不符合格式的字符串
+//        format: 'yyyy-mm-dd',     //日期格式
+//        keyboardNavigation: true, //是否显示箭头导航
+//        language: 'cn',           //语言
+//        minViewMode: 0,
+//        orientation: "auto",      //方向
+//        rtl: true,
+//        startDate: -Infinity,     //日历开始日期
+//        startView: 0,             //开始显示
+//        todayBtn: false,          //今天按钮
+//        todayHighlight: false,    //今天高亮
+//        weekStart: 0              //星期几是开始
+//
+//    });
     $(function() {
         var errorMsg = '${errorMsg}';
         if(errorMsg!=null&&errorMsg!=""){
@@ -63,6 +115,7 @@
 
         $scope.param = {
             person:'',
+            birthDate:'',
             iphone:'',
             address:'',
             pid:${pid}
@@ -73,6 +126,10 @@
 
            if(isNull($scope.param.person)){
                 layer.msg("请输入联系人名字");
+               return false;
+           }
+           if(isNull($scope.param.birthDate)){
+                 layer.msg("请输入出生年月");
                return false;
            }
             if(!validatemobile($scope.param.iphone)){

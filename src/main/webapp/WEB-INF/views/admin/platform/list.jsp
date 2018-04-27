@@ -10,7 +10,7 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-    String websiteBasePath =  request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+    String websitePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
     double rand = Math.random();
 %>
 <html>
@@ -59,6 +59,7 @@
 </body>
 
     <script>
+        var webPath = "<%=websitePath%>";
         $(function () {
             common.initDateTimeRange();
         })
@@ -81,6 +82,7 @@
             var row = $.map($("#demo-table").bootstrapTable('getSelections'),function(row){
                 return row.id ;
             });//只得到其中的ID
+
             if(row.length==0){
                 layer.msg("请选择需要修改的数据");
                 return false;
@@ -93,39 +95,40 @@
         }
 
         function deletePf() {
-            var row = $.map($("#demo-table").bootstrapTable('getSelections'),function(row){
-                return row.pfId ;
+            var pfIds = $.map($("#demo-table").bootstrapTable('getSelections'),function(row){
+                return row.id;
             });
-            if(row.length==0){
+            if(pfIds.length==0){
                 layer.msg("请选择需要删除的数据");
                 return false;
             }
-            if(row.length>1){
-                layer.msg("只能选中一条数据进行删除");
-                return false;
-            }
-            $.ajax({
-                url:'/admin/platform/delete',
-                type:'POST', //GET
-                async:false,    //或false,是否异步
-                data:{
-                    pfId:pfId
-                },
-                timeout:5000,    //超时时间
-                dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
-                success:function(data,textStatus,jqXHR){
-                   // console.log(data);
-                    layer.msg(data.msg);
-                    if(data.code==0){
-                        $('#demo-table').bootstrapTable('refresh');    //刷新表格
+            layer.confirm('您确定要删除这条数据吗?',{
+                btn:['确定','取消']
+            },function () {
+                $.ajax({
+                    url:'/admin/platform/delete',
+                    type:'POST', //GET
+                    async:false,    //或false,是否异步
+                    data:{
+                        pfIds:pfIds
+                    },
+                    timeout:5000,    //超时时间
+                    dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                    success:function(data,textStatus,jqXHR){
+                        console.log(data);
+                        layer.msg(data.msg);
+                            if(data.code==0){
+                                $('#demo-table').bootstrapTable('refresh');    //刷新表格
+                            }
+                    },
+                    error:function(xhr,textStatus){
+                        console.log('错误')
+                        console.log(xhr)
+                        console.log(textStatus)
                     }
-                },
-                error:function(xhr,textStatus){
-                    console.log('错误')
-                    console.log(xhr)
-                    console.log(textStatus)
-                }
-            })
+                 })
+            });
+
         }
 
     </script>

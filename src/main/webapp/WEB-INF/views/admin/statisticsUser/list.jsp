@@ -26,14 +26,6 @@
     <div class="container" style="width: 100%">
         <div id="toolbar" style="margin:10px auto;">
             <div class="form-inline" role="form" style=" width: 100%">
-                <%--<div class="form-group" style="float: left;margin-left: 5px;">--%>
-                    <%--<button type="button" onclick="openAddWin()" class="btn btn-primary">--%>
-                        <%--  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 新增--%>
-                    <%--</button>--%>
-                    <%--<button type="button" onclick="openUpdateWin()" class="btn btn-primary">--%>
-                        <%--  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 修改--%>
-                    <%--</button>--%>
-                <%--</div>--%>
                 <div class="form-group">
                     <select id="pfId" class="form-control" name="pfId">
                         <option value="-1">请选择品牌</option>

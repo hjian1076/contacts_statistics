@@ -50,5 +50,11 @@ public class StatisticsUserServiceImpl implements StatisticsUserService {
             logger.error("手机号码已经存在："+staUser.getIphone());
             throw new UserRepeatException("手机号码已存在！！！");
         }
+        StatisticsUser oldStaUser1 = null;
+        statisticsUserDao.findStaUserByPerson(staUser.getPerson());
+        if(oldStaUser!=null && oldStaUser.getId()==oldStaUser1.getId()){
+             logger.error("联系人已经存在："+staUser.getPerson());
+            throw new UserRepeatException("联系人已存在！！！");
+        }
     }
 }

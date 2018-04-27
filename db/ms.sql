@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2018-04-25 20:39:04
+Date: 2018-04-27 19:24:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `tb_page_res` (
   `show_menu` int(1) DEFAULT NULL,
   `parent_res_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tb_page_res
@@ -36,6 +36,7 @@ INSERT INTO `tb_page_res` VALUES ('1', '信息管理', '0', '', '0', '0');
 INSERT INTO `tb_page_res` VALUES ('2', '系统设置', '0', '', '0', '0');
 INSERT INTO `tb_page_res` VALUES ('4', '信息统计', '1', '/admin/statisticsUser/statisticsList', '0', '1');
 INSERT INTO `tb_page_res` VALUES ('5', '修改密码', '1', '/admin/user/updatePwdPage', '0', '2');
+INSERT INTO `tb_page_res` VALUES ('6', '平台列表', '1', '/admin/platform/platformList', '0', '2');
 
 -- ----------------------------
 -- Table structure for `tb_platform_config`
@@ -47,13 +48,14 @@ CREATE TABLE `tb_platform_config` (
   `website` varchar(1000) DEFAULT NULL COMMENT '官网地址',
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tb_platform_config
 -- ----------------------------
-INSERT INTO `tb_platform_config` VALUES ('1', '百度', 'http://news.baidu.com/', '2018-04-25 17:14:42');
-INSERT INTO `tb_platform_config` VALUES ('2', 'CSDN', 'https://blog.csdn.net/a379850992/article/details/54288595', '2018-04-25 19:03:07');
+INSERT INTO `tb_platform_config` VALUES ('5', '测试1', 'http://www.baidu.com', '2018-04-27 16:53:01');
+INSERT INTO `tb_platform_config` VALUES ('6', '测试2', 'http://www.taobao.com', '2018-04-27 16:53:36');
+INSERT INTO `tb_platform_config` VALUES ('7', '测试3', 'http://www.hao123.com', '2018-04-27 16:53:58');
 
 -- ----------------------------
 -- Table structure for `tb_statistics_user`
@@ -66,34 +68,20 @@ CREATE TABLE `tb_statistics_user` (
   `address` varchar(50) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `pf_id` int(11) NOT NULL,
+  `birth_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tb_statistics_user
 -- ----------------------------
-INSERT INTO `tb_statistics_user` VALUES ('1', 'aaaa', '11111111111', '11111', '2018-04-24 15:51:14', '1');
-INSERT INTO `tb_statistics_user` VALUES ('2', 'bbbbb', '22222222222', '22222', '2018-04-11 12:51:44', '0');
-INSERT INTO `tb_statistics_user` VALUES ('3', 'ccccc', '33333333333', '33333', '2018-04-12 15:52:06', '0');
-INSERT INTO `tb_statistics_user` VALUES ('4', 'ddddd', '11223344551', '21311', '2018-04-18 15:52:25', '0');
-INSERT INTO `tb_statistics_user` VALUES ('5', 'qqqqq', '12121212121', '222111', '2018-04-21 15:52:46', '0');
-INSERT INTO `tb_statistics_user` VALUES ('6', '221111', '12121212122', '12122', '2018-04-12 15:53:10', '0');
-INSERT INTO `tb_statistics_user` VALUES ('7', '221112', '11111222221', '122122', '2018-04-12 15:53:30', '0');
-INSERT INTO `tb_statistics_user` VALUES ('8', 'aswwa', '12312312312', '2122', '2018-04-13 15:53:50', '0');
-INSERT INTO `tb_statistics_user` VALUES ('9', '2112', '44422244422', '121222', '2018-04-14 15:54:14', '0');
-INSERT INTO `tb_statistics_user` VALUES ('10', '1212', '33333333332', '11222', '2018-04-13 15:54:29', '0');
-INSERT INTO `tb_statistics_user` VALUES ('11', '12222', '22222222212', '22112', '2018-04-11 15:54:44', '0');
-INSERT INTO `tb_statistics_user` VALUES ('12', '12121', 'ssss', 'saaaa', '2018-04-25 19:33:31', '1');
-INSERT INTO `tb_statistics_user` VALUES ('13', '', '', '', '2018-04-25 19:58:54', '1');
-INSERT INTO `tb_statistics_user` VALUES ('14', '', '', '', '2018-04-25 19:59:04', '2');
-INSERT INTO `tb_statistics_user` VALUES ('15', 'dad', '', '', '2018-04-25 20:01:49', '2');
-INSERT INTO `tb_statistics_user` VALUES ('16', '', 'sss', '', '2018-04-25 20:11:01', '2');
-INSERT INTO `tb_statistics_user` VALUES ('17', '', '1212', '', '2018-04-25 20:12:07', '2');
-INSERT INTO `tb_statistics_user` VALUES ('18', '', 'sdsd', '', '2018-04-25 20:13:47', '2');
-INSERT INTO `tb_statistics_user` VALUES ('19', 'sdsd', '15213425633', 'dsadas', '2018-04-25 20:18:48', '2');
-INSERT INTO `tb_statistics_user` VALUES ('20', 'sdsd', '15213425633', 'dsadas', '2018-04-25 20:21:41', '2');
-INSERT INTO `tb_statistics_user` VALUES ('21', 'dsds', '15213425633', '21212313', '2018-04-25 20:22:20', '1');
-INSERT INTO `tb_statistics_user` VALUES ('22', '1212', '15213425633', 'dsadsad', '2018-04-25 20:29:34', '1');
+INSERT INTO `tb_statistics_user` VALUES ('1', '测试', '15213425633', '重庆市江北区', '2018-04-26 19:34:30', '1', '2018-04-27 00:00:00');
+INSERT INTO `tb_statistics_user` VALUES ('2', '测试名字2', '15213425633', '重庆市沙坪坝区', '2018-04-02 19:51:20', '1', '2018-04-20 00:00:00');
+INSERT INTO `tb_statistics_user` VALUES ('3', '测试人1', '13465865456', '11111', '2018-04-27 17:30:21', '7', '2018-04-09 00:00:00');
+INSERT INTO `tb_statistics_user` VALUES ('4', '测试人2', '13976485236', '重庆市大渡口区', '2018-04-27 17:32:55', '7', '1992-06-25 00:00:00');
+INSERT INTO `tb_statistics_user` VALUES ('5', '测试人1', '13464973193', '5555665', '2018-04-27 17:35:20', '6', '2018-04-20 00:00:00');
+INSERT INTO `tb_statistics_user` VALUES ('6', '测试人5', '13976497664', '144444', '2018-04-27 17:37:24', '5', '2018-04-19 00:00:00');
+INSERT INTO `tb_statistics_user` VALUES ('7', '测试人6', '13464975497', '555555', '2018-04-27 17:44:25', '5', '2018-04-20 00:00:00');
 
 -- ----------------------------
 -- Table structure for `tb_user`
@@ -110,4 +98,4 @@ CREATE TABLE `tb_user` (
 -- ----------------------------
 -- Records of tb_user
 -- ----------------------------
-INSERT INTO `tb_user` VALUES ('1', 'admin', 'KMJ+vYhSQpMDHgbm6QCWqQ==', '2018-04-23 17:50:52');
+INSERT INTO `tb_user` VALUES ('1', 'admin', 'Z++2G7Kq7fd3TUgNlFzQyw==', '2018-04-23 17:50:52');

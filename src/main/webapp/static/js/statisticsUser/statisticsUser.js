@@ -14,13 +14,8 @@ function initTable(){
     //
     var url = "/admin/statisticsUser/getStatisticsAll";
     var table = $('#demo-table');
-    //var showExport = false;
     var columns = [
-        {
-            field : '',
-            title : '',
-            checkbox: true
-        }, {
+         {
             field : 'id',
             title : '联系人ID',
             align : 'center',
@@ -46,17 +41,25 @@ function initTable(){
             align : 'center',
             valign : 'middle'
         },{
+            field : 'birthDate',
+            title : '出生年月',
+            align : 'center',
+            valign : 'middle',
+            formatter: function () {
+                return getNowFormatDate();
+            }
+        },{
             field : 'createTime',
             title : '创建时间',
             align : 'center',
             valign : 'middle',
-            formatter: function (value, row, index) {
+            formatter: function (value) {
                 return formatTime(value);
             }
         }
 
     ];
-    tableUtil.initTable(table,url,columns);
+    tableUtil.initTableShowExport(table,url,tableUtil.EXCEL_NAME.STATISTICS_TABLE,columns);
 }
 
 function queryParams(params) {
