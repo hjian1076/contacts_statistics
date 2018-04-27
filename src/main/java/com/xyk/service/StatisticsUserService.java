@@ -13,7 +13,7 @@ public interface StatisticsUserService {
      * 查询联系人所有信息
      * @return
      */
-    public Pageinfo<StatisticsUser> statisticsList(QueryParam param);
+    Pageinfo<StatisticsUser> statisticsList(QueryParam param);
     /**
      * 添加联系人信息
      */
