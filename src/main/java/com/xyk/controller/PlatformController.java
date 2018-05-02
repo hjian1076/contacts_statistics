@@ -98,6 +98,9 @@ public class PlatformController {
     @ResponseBody
     public  Result updatePlatform(String jsonParam){
         PlatformConfig platform = JsonUtil.GSON.fromJson(jsonParam, PlatformConfig.class);
+        if(platformConfigDao.findPfByName(platform.getPlatformName())!=null){
+            return ResultUtil.error(ResultEnum.PARAM_ERROR.getCode(),"品牌已存在请重新输入");
+        }
         platformConfigService.updatePlatform(platform);
         return ResultUtil.success();
     }

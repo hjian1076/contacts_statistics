@@ -45,16 +45,6 @@ public class LoginController extends BaseController{
     @Autowired
     UserDao userDao;
     private Logger logger = Logger.getLogger(LoginController.class);
-
-    /**
-     * 跳转到填写联系方式页面
-     * @return
-     */
-//    @RequestMapping(value = "/addStatisticsUser")
-//    public String addStatisticsUser( ){
-//        return "/addStatisticsList";
-//    }
-
     /**
      * 根据id跳转到指定页面
      * @param p
@@ -76,21 +66,24 @@ public class LoginController extends BaseController{
     @ResponseBody
     public Result addStaUser(@RequestParam("person") String person, @RequestParam("iphone") String iphone,@RequestParam("birthDate") String birthDate,@RequestParam("address") String address, @RequestParam("pid") Integer pid){
         StatisticsUser staUser = new StatisticsUser();
+        if(statisticsUserDao.findStaUserByIphone(iphone)!=null){
+            return ResultUtil.error(ResultEnum.UNKNOW_ERROR.getCode(),"手机号已存在，请重新输入");
+        }
         staUser.setIphone(iphone);
         staUser.setPerson(person);
         staUser.setAddress(address);
-        staUser.setBirthDate(DateUtil.stringToDate(birthDate,"yyyy-MM-dd"));
+        staUser.setBirthDate(DateUtil.stringToDate(birthDate,"yyyy年MM月dd日"));
         staUser.setPfId(pid);
-        statisticsUserService.validateStaUserUnique(staUser);
         statisticsUserService.addStatisticsUser(staUser);
         PlatformConfig platform = platformConfigDaoImpl.findPlatformById(pid);
         if(platform==null){
-            //跳转到错误页面
+                //跳转到错误页面
             return ResultUtil.error(ResultEnum.UNKNOW_ERROR.getCode(),"系统错误");
         }else{
             String weibist =  platform.getWebsite();
             return ResultUtil.success(weibist);
         }
+
 
     }
     //主页
