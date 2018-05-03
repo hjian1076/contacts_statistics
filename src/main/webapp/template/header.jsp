@@ -23,7 +23,7 @@
 <meta name="x5-fullscreen" content="true">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <!-- 网址图标 -->
-<link rel="shortcut icon" href="<%=basePath%>static/img/icon.png">
+<%--<link rel="shortcut icon" href="<%=basePath%>static/img/icon.png">--%>
 
 
 <!--[if lt IE 9]>
