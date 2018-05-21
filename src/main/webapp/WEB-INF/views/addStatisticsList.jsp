@@ -44,7 +44,7 @@
         <form>
             <div class="item">
 			    <span>姓名</span>
-                <input type="tel" ng-model="param.person" placeholder="请输入姓名" />
+                <input type="text" ng-model="param.person" placeholder="请输入姓名" />
 		    </div>
 		    <div class="item">
 			    <span>手机号</span>

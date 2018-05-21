@@ -16,9 +16,9 @@ public class StatisticsUser {
     @Basic
     @Column(name = "iphone")
     private String iphone;
-    @Basic
-    @Column(name = "birth_date")
-    private Date birthDate;
+//    @Basic
+//    @Column(name = "birth_date")
+//    private Date birthDate;
     @Basic
     @Column(name = "address")
     private String address;
@@ -31,13 +31,13 @@ public class StatisticsUser {
     @Transient
     private String platformName;//平台名称
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
+//    public Date getBirthDate() {
+//        return birthDate;
+//    }
+//
+//    public void setBirthDate(Date birthDate) {
+//        this.birthDate = birthDate;
+//    }
 
     public String getPlatformName() {
         return platformName;

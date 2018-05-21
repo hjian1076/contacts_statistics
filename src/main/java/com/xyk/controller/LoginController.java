@@ -56,7 +56,10 @@ public class LoginController extends BaseController{
         model.addAttribute("pid",p);
         return "/addStatisticsList";
     }
-
+    @RequestMapping("/test")
+    public String test(){
+        return "/test";
+    }
     /**
      * 添加联系人信息
      *
@@ -64,7 +67,7 @@ public class LoginController extends BaseController{
      */
     @RequestMapping(value = "/addStaUser",method = RequestMethod.POST)
     @ResponseBody
-    public Result addStaUser(@RequestParam("person") String person, @RequestParam("iphone") String iphone,@RequestParam("birthDate") String birthDate,@RequestParam("address") String address, @RequestParam("pid") Integer pid){
+    public Result addStaUser(@RequestParam("person") String person, @RequestParam("iphone") String iphone,@RequestParam("address") String address, @RequestParam("pid") Integer pid){
         StatisticsUser staUser = new StatisticsUser();
         if(statisticsUserDao.findStaUserByIphone(iphone)!=null){
             return ResultUtil.error(ResultEnum.UNKNOW_ERROR.getCode(),"手机号已存在，请重新输入");
@@ -72,7 +75,7 @@ public class LoginController extends BaseController{
         staUser.setIphone(iphone);
         staUser.setPerson(person);
         staUser.setAddress(address);
-        staUser.setBirthDate(DateUtil.stringToDate(birthDate,"yyyy年MM月dd日"));
+     //   staUser.setBirthDate(DateUtil.stringToDate(birthDate,"yyyy年MM月dd日"));
         staUser.setPfId(pid);
         statisticsUserService.addStatisticsUser(staUser);
         PlatformConfig platform = platformConfigDaoImpl.findPlatformById(pid);
@@ -127,6 +130,8 @@ public class LoginController extends BaseController{
             logger.info(username+"登录成功");
             String userId = user.getId().toString();
             List<PageRes> resList =installMenu(user.getResList());
+            //设置角色名称在主页显示
+
             httpSession.setAttribute("user",user);
             String sessionId = httpSession.getId();
             /**********以下为单点登录************/

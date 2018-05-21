@@ -40,15 +40,17 @@ function initTable(){
             title : '联系人地址',
             align : 'center',
             valign : 'middle'
-        },{
-            field : 'birthDate',
-            title : '出生年月',
-            align : 'center',
-            valign : 'middle',
-            formatter: function () {
-                return getNowFormatDate();
-            }
-        },{
+        }
+        // ,{
+        //     field : 'birthDate',
+        //     title : '出生年月',
+        //     align : 'center',
+        //     valign : 'middle',
+        //     formatter: function () {
+        //         return getNowFormatDate();
+        //     }
+        // }
+        ,{
             field : 'createTime',
             title : '创建时间',
             align : 'center',

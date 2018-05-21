@@ -17,6 +17,17 @@ public class User {
     @Column(name = "password")
     private String password;
     @Transient
+    private String roleName;
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    @Transient
     private List<PageRes> resList;//用户的权限集合,只有一级没有子级，用户主页面显示
     @Transient
     private List<PageRes> resList2;//用户的权限集合，具有父子关系

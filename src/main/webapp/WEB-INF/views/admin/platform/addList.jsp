@@ -8,6 +8,8 @@
     <title>添加品牌</title>
     <!--头部-->
     <jsp:include page="/template/header.jsp" />
+    <link href="<%=basePath%>static/css/fileinput.min.css" rel="stylesheet">
+
     <!--头部结束-->
 </head>
 <body class="gray-bg">
@@ -16,7 +18,7 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <form method="post" class="form-horizontal">
+                    <form method="post" class="form-horizontal" enctype="multipart/form-data">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">品牌名称<span style="color: red;">*</span></label>
                             <div class="col-sm-8">
@@ -29,6 +31,15 @@
                                 <input  ng-model="platform.website"  type="text" class="form-control">
                             </div>
                         </div>
+
+                       <div class="form-group">
+                            <label class="col-sm-2 control-label">图片上传<span style="color: red;">*</span></label>
+                            <div class="col-sm-8">
+                                <input id="itemImagers" name="itemImagers"  type="file" >
+                            </div>
+                        </div>
+
+
                         <div class="hr-line-dashed"></div>
 
 
@@ -48,9 +59,32 @@
 
 <!-- 导入尾部公共js -->
 <jsp:include page="/template/tail.jsp" />
+<script src="<%=basePath%>static/js/fileinput.min.js"></script>
+<script src="<%=basePath%>static/js/locales/zh.js"></script>
 <script>
     $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
+     function initFileInput(ctrlName, uploadUrl) {
+        var control = $('#' + ctrlName);
+        control.fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: uploadUrl, //上传的地址
+            allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
+            dropZoneEnabled:false
+            //uploadAsync: false, //插件支持同步和异步
+            //showUpload: false, //是否显示上传按钮
+        }).on("fileuploaded", function(event, data) {
+            //上传图片后的回调函数，可以在这做一些处理
+            console.log(data);
+        });
+    }
 
+
+$(function(){
+    //指定上传controller访问地址
+    var path = 'http://localhost:8080/admin/platform/uploadFile';
+    //页面初始化加载initFileInput()方法传入ID名和上传地址
+    initFileInput("itemImagers",path);
+})
     app.controller('addPlatformController', function($scope,$http) {
 
         $scope.platform,

@@ -33,12 +33,6 @@
                     <input type="password" class="form-control" name="password" id="password" placeholder="密码" required="">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b" href="JavaScript:void(0);">登 录</button>
-
-                <p class="text-muted text-left">
-                    <a href="/find_pwd">
-                        <small>忘记密码了？</small>
-                    </a>
-                </p>
             </form>
         </div>
     </div>

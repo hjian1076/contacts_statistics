@@ -1,6 +1,5 @@
 package com.xyk.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.xyk.bean.Pageinfo;
 import com.xyk.bean.QueryParam;
 import com.xyk.bean.Result;
@@ -13,14 +12,16 @@ import com.xyk.util.ResultUtil;
 import com.xyk.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin/platform")
@@ -113,4 +114,33 @@ public class PlatformController {
         platformConfigService.deletePlatformByIdS(pfIds);
         return ResultUtil.success();
     }
+
+    @RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
+    @ResponseBody
+    private String fildUpload(@RequestParam(value="itemImagers",required=false) MultipartFile file,
+                              HttpServletRequest request, Model model)throws Exception{
+            //基本表单
+
+            //获得物理路径webapp所在路径
+            String pathRoot = request.getSession().getServletContext().getRealPath("");
+            String path="";
+            if(!file.isEmpty()){
+                //生成uuid作为文件名称
+                String uuid = UUID.randomUUID().toString().replaceAll("-","");
+                //获得文件类型（可以判断如果不是图片，禁止上传）
+                String contentType=file.getContentType();
+                //获得文件后缀名称
+                String imageName=contentType.substring(contentType.indexOf("/")+1);
+                //地址
+                path="/static/img/"+uuid+"."+imageName;
+                file.transferTo(new File(pathRoot+path));
+            }else {
+                //可以使用以下包装类。响应结果，请看附件
+                //ResponseResult.build(400,"上传图片失败");
+            }
+            System.out.println(path);
+            request.setAttribute("imagesPath", path);
+            model.addAttribute("imgPath",path);
+            return path;
+        }
 }
