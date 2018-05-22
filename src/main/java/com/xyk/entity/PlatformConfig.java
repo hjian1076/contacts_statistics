@@ -18,7 +18,16 @@ public class PlatformConfig {
     @Basic
     @Column(name = "create_time")
     private Date createTime;//创建时间
+    @Column(name = "image")
+    private String image;
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
     public int getId() {
         return id;
     }

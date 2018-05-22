@@ -8,7 +8,6 @@
     <title>添加品牌</title>
     <!--头部-->
     <jsp:include page="/template/header.jsp" />
-    <link href="<%=basePath%>static/css/fileinput.min.css" rel="stylesheet">
 
     <!--头部结束-->
 </head>
@@ -18,7 +17,7 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <form method="post" class="form-horizontal" enctype="multipart/form-data">
+                    <div class="form-horizontal">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">品牌名称<span style="color: red;">*</span></label>
                             <div class="col-sm-8">
@@ -35,7 +34,12 @@
                        <div class="form-group">
                             <label class="col-sm-2 control-label">图片上传<span style="color: red;">*</span></label>
                             <div class="col-sm-8">
-                                <input id="itemImagers" name="itemImagers"  type="file" >
+                                <input ng-model="platform.image" type="text" readonly="readonly" id="imageUrl" class="form-control">
+                                <form id="imageForm">
+                                    <img id='img' width='120px' height='100px' src=''/><br>
+                                    <input type="file" name="file" onchange="SelectImage(this);"/><br>
+                                    <input type="button" onclick="uploadImage();" value="上传图片"/>
+                                </form>
                             </div>
                         </div>
 
@@ -50,7 +54,7 @@
                                 <button class="btn btn-white" onclick="parent.closeWin()" type="button">取消</button>
                             </div>
                         </div>
-                    </form>
+                     </div>
                 </div>
             </div>
         </div>
@@ -59,32 +63,8 @@
 
 <!-- 导入尾部公共js -->
 <jsp:include page="/template/tail.jsp" />
-<script src="<%=basePath%>static/js/fileinput.min.js"></script>
-<script src="<%=basePath%>static/js/locales/zh.js"></script>
 <script>
     $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
-     function initFileInput(ctrlName, uploadUrl) {
-        var control = $('#' + ctrlName);
-        control.fileinput({
-            language: 'zh', //设置语言
-            uploadUrl: uploadUrl, //上传的地址
-            allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
-            dropZoneEnabled:false
-            //uploadAsync: false, //插件支持同步和异步
-            //showUpload: false, //是否显示上传按钮
-        }).on("fileuploaded", function(event, data) {
-            //上传图片后的回调函数，可以在这做一些处理
-            console.log(data);
-        });
-    }
-
-
-$(function(){
-    //指定上传controller访问地址
-    var path = 'http://localhost:8080/admin/platform/uploadFile';
-    //页面初始化加载initFileInput()方法传入ID名和上传地址
-    initFileInput("itemImagers",path);
-})
     app.controller('addPlatformController', function($scope,$http) {
 
         $scope.platform,
@@ -93,23 +73,29 @@ $(function(){
             // 修改用户
             $scope.platform = angular.fromJson('${platform}');
             $scope.url = "/admin/platform/update";
+            document.getElementById("img").src = $scope.platform.image;
         }else{
             $scope.platform = {
                 platformName:'',
                 website:'',
+                image:'',
             };
             $scope.url = "/admin/platform/add";
         }
 
         //保存
         $scope.save = function(){
-
+            $scope.platform.image = $("#imageUrl").val();
             if(isNull($scope.platform.platformName)){
                 layer.msg("请输入品牌名称");
                 return false;
             }
             if(isNull($scope.platform.website)){
                 layer.msg("请输入品牌网址");
+                return false;
+            }
+            if(isNull($scope.platform.image)){
+                layer.msg("上传图片不能为空");
                 return false;
             }
             if(!validateWebsite($scope.platform.website)){
@@ -137,9 +123,45 @@ $(function(){
                 console.log(data);
             });
         }
-
-
     });
+    function SelectImage(imgFile) {
+       var file =  imgFile.value.substring(imgFile.value.lastIndexOf("."),imgFile.value.length);
+       file = file.toLowerCase();
+       if((file!='.jpg')&&(file!='.gif')&&(file!='.jpeg')&&(file!='.png')&&(file!='.bmp')){
+           alert("对不起，图片格式错误，请重新上传");
+           imgFile.value="";
+       }
+       var reader = new FileReader();
+       reader.readAsDataURL(imgFile.files[0]);
+       reader.onload=function (evt) {
+           document.getElementById('img').src = evt.target.result;
+       }
+    }
+      function uploadImage() {
+        var formData = new FormData(document.getElementById('imageForm'));
+        console.log(formData);
+        $.ajax({
+            type:'POST',
+            url:'/admin/platform/uploadImage',
+            data:formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function (data) {
+                if(data.code==0){
+                    var imageUrl = data.data;
+                    $("#imageUrl").val(imageUrl);
+                    alert('上传成功');
+                }else {
+                    layer.msg(data.msg);
+                }
+            },
+            error:function () {
+                alert('网络故障');
+            }
+        });
+    }
 </script>
 
 </body>

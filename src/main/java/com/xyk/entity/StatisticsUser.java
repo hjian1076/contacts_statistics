@@ -30,8 +30,7 @@ public class StatisticsUser {
     private int pfId;//平台ID
     @Transient
     private String platformName;//平台名称
-
-//    public Date getBirthDate() {
+    //    public Date getBirthDate() {
 //        return birthDate;
 //    }
 //
