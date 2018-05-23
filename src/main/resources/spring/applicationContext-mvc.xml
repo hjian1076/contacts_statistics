@@ -22,6 +22,8 @@
 
     <!-- 对静态资源文件的访问  方案二 （二选一）-->
     <mvc:resources mapping="/static/**" location="/static/" cache-period="31556926"/>
+    <!-- 资源映射 -->
+    <mvc:resources location="/images/" mapping="/images/**"/>
     <!--&lt;!&ndash; 在spring-mvc配置文件中将404.html、500.html等设置为资源文件，避免被springmvc再次拦截。 &ndash;&gt;-->
     <!--<mvc:resources mapping="/error/**" location="/WEB-INF/pages/error/" />-->
     <!--<mvc:resources mapping="/doctemp/**" location="/doctemp/" />-->

@@ -100,8 +100,17 @@ public class PlatformController extends BaseController{
     @ResponseBody
     public  Result updatePlatform(String jsonParam){
         PlatformConfig platform = JsonUtil.GSON.fromJson(jsonParam, PlatformConfig.class);
-        if(platformConfigDao.findPfByName(platform.getPlatformName())!=null){
-            return ResultUtil.error(ResultEnum.PARAM_ERROR.getCode(),"品牌已存在请重新输入");
+        //获取修改后的品牌名称
+        String newPlatformName = platform.getPlatformName();
+        PlatformConfig oldPlatform = platformConfigDao.findPfById(platform.getId());
+        //获取修改之前的品牌名称
+        String oldPlatformName = oldPlatform.getPlatformName();
+        PlatformConfig pfByName = platformConfigDao.findPfByName(platform.getPlatformName());
+        if (newPlatformName.equals(oldPlatformName)){
+            platformConfigService.updatePlatform(platform);
+            return ResultUtil.success();
+        }else if(platform==null ||newPlatformName.equals(pfByName.getPlatformName())){
+            return ResultUtil.error(ResultEnum.PARAM_ERROR.getCode(),"品牌不能为空或已存在请重新输入");
         }
         platformConfigService.updatePlatform(platform);
         return ResultUtil.success();

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2018-05-22 17:35:12
+Date: 2018-05-23 18:32:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `tb_page_res` (
   `show_menu` int(1) DEFAULT NULL,
   `parent_res_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tb_page_res
@@ -35,6 +35,7 @@ CREATE TABLE `tb_page_res` (
 INSERT INTO `tb_page_res` VALUES ('4', '信息统计', '1', '/admin/statisticsUser/statisticsList', '0', '1');
 INSERT INTO `tb_page_res` VALUES ('5', '修改密码', '1', '/admin/user/updatePwdPage', '0', '2');
 INSERT INTO `tb_page_res` VALUES ('6', '平台列表', '1', '/admin/platform/platformList', '0', '2');
+INSERT INTO `tb_page_res` VALUES ('7', '广告位管理', '1', '/admin/adSpace/adSpaceList', '0', '1');
 
 -- ----------------------------
 -- Table structure for `tb_platform_config`
@@ -54,7 +55,7 @@ CREATE TABLE `tb_platform_config` (
 -- ----------------------------
 INSERT INTO `tb_platform_config` VALUES ('8', '测试1', 'http://www.baidu.com', '2018-05-07 17:25:04', null);
 INSERT INTO `tb_platform_config` VALUES ('9', '测试2', 'http://www.hao123.com', '2018-05-07 17:27:51', null);
-INSERT INTO `tb_platform_config` VALUES ('11', '测试6', 'http://www.youku.com', '2018-05-22 17:22:24', '/images/platform/1526980940763165.jpg');
+INSERT INTO `tb_platform_config` VALUES ('11', '测试5', 'http://www.youku.com', '2018-05-23 18:31:52', '/images/platform/1527071497176448.jpg');
 
 -- ----------------------------
 -- Table structure for `tb_statistics_user`
