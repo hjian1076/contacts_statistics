@@ -1,13 +1,11 @@
 package com.xyk.controller;
 
 import com.xyk.bean.Result;
+import com.xyk.dao.AdSpaceDao;
 import com.xyk.dao.PlatformConfigDaoImpl;
 import com.xyk.dao.StatisticsUserDao;
 import com.xyk.dao.UserDao;
-import com.xyk.entity.PageRes;
-import com.xyk.entity.PlatformConfig;
-import com.xyk.entity.StatisticsUser;
-import com.xyk.entity.User;
+import com.xyk.entity.*;
 import com.xyk.enums.ResultEnum;
 import com.xyk.service.StatisticsUserService;
 import com.xyk.service.UserService;
@@ -44,6 +42,8 @@ public class LoginController extends BaseController{
     StatisticsUserDao statisticsUserDao;
     @Autowired
     UserDao userDao;
+    @Autowired
+    AdSpaceDao adSpaceDao;
     private Logger logger = Logger.getLogger(LoginController.class);
     /**
      * 根据id跳转到指定页面
@@ -56,12 +56,13 @@ public class LoginController extends BaseController{
         model.addAttribute("pid",p);
         return "/addStatisticsList";
     }
-    @RequestMapping("/test")
-    public String test(){
-        return "/test";
+    @RequestMapping(value = "/getAdSpaceById",method = RequestMethod.GET)
+    public String getAdSpace(@RequestParam("p") Integer p,Model model){
+        model.addAttribute("pid",p);
+        return "/register";
     }
     /**
-     * 添加联系人信息
+     * 添加联系人信息并跳转页面
      *
      * @return
      */
@@ -75,7 +76,6 @@ public class LoginController extends BaseController{
         staUser.setIphone(iphone);
         staUser.setPerson(person);
         staUser.setAddress(address);
-     //   staUser.setBirthDate(DateUtil.stringToDate(birthDate,"yyyy年MM月dd日"));
         staUser.setPfId(pid);
         statisticsUserService.addStatisticsUser(staUser);
         PlatformConfig platform = platformConfigDaoImpl.findPlatformById(pid);
@@ -86,7 +86,30 @@ public class LoginController extends BaseController{
             String weibist =  platform.getWebsite();
             return ResultUtil.success(weibist);
         }
-
+    }
+     /**
+     * 添加联系人信息
+     *
+     * @return
+     */
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @ResponseBody
+    public Result register(@RequestParam("person") String person, @RequestParam("iphone") String iphone,@RequestParam("address") String address, @RequestParam("pid") Integer pid){
+        StatisticsUser staUser = new StatisticsUser();
+        if(statisticsUserDao.findStaUserByIphone(iphone)!=null){
+            return ResultUtil.error(ResultEnum.UNKNOW_ERROR.getCode(),"手机号已存在，请重新输入");
+        }
+        staUser.setIphone(iphone);
+        staUser.setPerson(person);
+        staUser.setAddress(address);
+        staUser.setPfId(pid);
+        statisticsUserService.addStatisticsUser(staUser);
+        AdSpace adSpace = adSpaceDao.findAdSpaceById(pid);
+        if(adSpace==null){
+            //跳转到错误页面
+            return ResultUtil.error(ResultEnum.UNKNOW_ERROR.getCode(),"系统错误");
+        }
+            return ResultUtil.success();
 
     }
     //主页
