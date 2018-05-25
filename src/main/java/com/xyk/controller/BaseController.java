@@ -47,7 +47,7 @@ public class BaseController {
      * @return
      */
     public Result uploadImage(MultipartFile file,HttpServletRequest request,String path){
-        //判断文件是否为空
+//        //判断文件是否为空
         if(file.isEmpty()){
             return ResultUtil.error(ResultEnum.PARAM_ERROR);
         }

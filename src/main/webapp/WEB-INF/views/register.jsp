@@ -40,7 +40,7 @@
 <body >
     <div ng-app="myApp" ng-controller="addController">
         <div class="tit">免费领机</div>
-		<img src="<%=basePath%>/static/img/bg.jpg"/>
+		<img src="${image}"/>
         <form>
             <div class="item">
 			    <span>姓名</span>

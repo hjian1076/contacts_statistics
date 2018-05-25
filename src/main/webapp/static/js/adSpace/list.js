@@ -47,7 +47,7 @@ function initTable(){
             valign : 'middle',
             formatter:function (value,row,index) {
 
-                return '<a onclick="createCode(+\'' +row.id+ '\')" class="btn btn-sm btn-primary">生成二维码</a>';
+                return '<a onclick="createCode(+\'' +row.id+ '\')" class="btn btn-sm btn-primary">链接地址</a>';
             }
         }
 
@@ -55,22 +55,8 @@ function initTable(){
     tableUtil.initTable(table,url,columns);
 }
 function createCode(id) {
-
-        var html = '<div id="qrcode" class="ibox-content" style="align-content: center">'+'</div>';
-        layer.open({
-                title:'生成二维码',
-                type: 1,
-                skin: 'layui-layer-rim', //加上边框
-                area: ['300px', '330px'], //宽高
-                content: html})
-        console.log(webPath);
-        var qcodepath = webPath+"/getAdSpaceById?p="+id;
-        console.log(qcodepath);
-        var qrcode = new QRCode(document.getElementById("qrcode"), {
-            width : 200,
-            height : 200
-        });
-        qrcode.makeCode(qcodepath);
+        var path = webPath+"/getAdSpaceById?p="+id;
+       window.location.href = path;
 }
 
 function queryParams(params) {

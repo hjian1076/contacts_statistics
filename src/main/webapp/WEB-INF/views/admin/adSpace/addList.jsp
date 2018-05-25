@@ -5,7 +5,7 @@
 %>
 <html>
 <head>
-    <title>添加品牌</title>
+    <title>添加广告位</title>
     <!--头部-->
     <jsp:include page="/template/header.jsp" />
 

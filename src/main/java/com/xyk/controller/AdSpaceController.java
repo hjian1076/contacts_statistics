@@ -5,7 +5,6 @@ import com.xyk.bean.QueryParam;
 import com.xyk.bean.Result;
 import com.xyk.dao.AdSpaceDao;
 import com.xyk.entity.AdSpace;
-import com.xyk.entity.PlatformConfig;
 import com.xyk.enums.ResultEnum;
 import com.xyk.service.AdSpaceService;
 import com.xyk.util.JsonUtil;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.management.Query;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -34,13 +31,20 @@ public class AdSpaceController extends BaseController{
     public String adSpaceList(){
         return "/admin/adSpace/list";
     }
+
+    /**
+     * 异步查询广告位信息列表
+     * @param param
+     * @return
+     */
     @RequestMapping("/getAdSpaceAll")
+    @ResponseBody
     public Result getAdSpaceAll(QueryParam param){
         Pageinfo<AdSpace> adSpaceList = adSpaceService.findAdSpaceList(param);
         return ResultUtil.success(adSpaceList);
     }
      /**
-     * 跳转到添加平台页面
+     * 跳转到添加广告位页面
      * @return
      */
     @RequestMapping(value = "/addList")
@@ -50,7 +54,7 @@ public class AdSpaceController extends BaseController{
 
     }
     /**
-     * 添加品牌
+     * 添加广告位
      * @return
      */
     @RequestMapping(value = "/add")
@@ -70,7 +74,7 @@ public class AdSpaceController extends BaseController{
 
     /**
      *
-     * 修改品牌信息
+     * 修改广告位信息
      * @param id
      * @param model
      * @return
@@ -99,13 +103,17 @@ public class AdSpaceController extends BaseController{
         //获取修改之前的品牌名称
         String oldAdSpaceName = oldAdSpace.getAdSpaceName();
         AdSpace adSpaceByName =adSpaceDao.findAdSpaceByName(adSpace.getAdSpaceName());
+        if (adSpaceByName==null){
+            adSpaceService.updateAdSpace(adSpace);
+            return ResultUtil.success();
+        }
         if (newAdSpaceName.equals(oldAdSpaceName)){
             adSpaceService.updateAdSpace(adSpace);
             return ResultUtil.success();
         }else if(adSpace==null ||newAdSpaceName.equals(adSpaceByName.getAdSpaceName())){
-            return ResultUtil.error(ResultEnum.PARAM_ERROR.getCode(),"品牌不能为空或已存在请重新输入");
+            return ResultUtil.error(ResultEnum.PARAM_ERROR.getCode(),"广告位不能为空或已存在请重新输入");
         }
-        adSpaceService.updateAdSpace(adSpace);
+
         return ResultUtil.success();
     }
 

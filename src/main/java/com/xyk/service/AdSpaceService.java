@@ -12,7 +12,7 @@ public interface AdSpaceService {
      */
     Pageinfo<AdSpace> findAdSpaceList(QueryParam param);
     /**
-     * 添加平台
+     * 添加广告位
      * @param ad
      */
     void addAdSpace(AdSpace ad);

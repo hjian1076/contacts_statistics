@@ -59,6 +59,9 @@ public class LoginController extends BaseController{
     @RequestMapping(value = "/getAdSpaceById",method = RequestMethod.GET)
     public String getAdSpace(@RequestParam("p") Integer p,Model model){
         model.addAttribute("pid",p);
+        AdSpace adSpace = adSpaceDao.findAdSpaceById(p);
+        String image = adSpace.getImage();
+        model.addAttribute("image",image);
         return "/register";
     }
     /**

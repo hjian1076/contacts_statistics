@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @ResponseBody
 public interface AdSpaceDao extends PagingAndSortingRepository<AdSpace,Integer>,JpaSpecificationExecutor<AdSpace> {
-    @Query(value = "select ad.* from tb_ad_space pf  where ad.id = ?1",nativeQuery = true)
-    AdSpace findAdSpaceById(int adId);
+    @Query(value = "select ad.* from tb_ad_space ad  where ad.id = ?1",nativeQuery = true)
+    AdSpace findAdSpaceById(int id);
 
     /**
      * 根据广告位名字查找

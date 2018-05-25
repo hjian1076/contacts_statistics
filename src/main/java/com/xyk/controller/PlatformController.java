@@ -106,13 +106,16 @@ public class PlatformController extends BaseController{
         //获取修改之前的品牌名称
         String oldPlatformName = oldPlatform.getPlatformName();
         PlatformConfig pfByName = platformConfigDao.findPfByName(platform.getPlatformName());
+        if (pfByName==null){
+            platformConfigService.updatePlatform(platform);
+            return ResultUtil.success();
+        }
         if (newPlatformName.equals(oldPlatformName)){
             platformConfigService.updatePlatform(platform);
             return ResultUtil.success();
         }else if(platform==null ||newPlatformName.equals(pfByName.getPlatformName())){
             return ResultUtil.error(ResultEnum.PARAM_ERROR.getCode(),"品牌不能为空或已存在请重新输入");
         }
-        platformConfigService.updatePlatform(platform);
         return ResultUtil.success();
     }
     @RequestMapping(value = "/delete")
