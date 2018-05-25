@@ -10,10 +10,27 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2018-05-23 18:32:34
+Date: 2018-05-25 18:47:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `tb_ad_space`
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_ad_space`;
+CREATE TABLE `tb_ad_space` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `adSpace_name` varchar(20) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `image` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of tb_ad_space
+-- ----------------------------
+INSERT INTO `tb_ad_space` VALUES ('1', '百度', '2018-05-23 21:23:52', '/images/adSpace/1527081828327439.jpg');
 
 -- ----------------------------
 -- Table structure for `tb_page_res`
@@ -68,13 +85,26 @@ CREATE TABLE `tb_statistics_user` (
   `address` varchar(50) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `pf_id` int(11) NOT NULL,
+  `page` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tb_statistics_user
 -- ----------------------------
-INSERT INTO `tb_statistics_user` VALUES ('13', 'will', '13986584656', '重庆江北区大石坝镇', '2018-05-08 09:39:52', '8');
+INSERT INTO `tb_statistics_user` VALUES ('13', 'will', '13986584656', '重庆江北区大石坝镇', '2018-05-08 09:39:52', '8', '品牌');
+INSERT INTO `tb_statistics_user` VALUES ('14', 'will', '13983573798', '1111111', '2018-05-25 13:35:58', '1', '广告位');
+INSERT INTO `tb_statistics_user` VALUES ('15', 'will', '13983577798', '1111111', '2018-05-25 13:36:39', '1', '广告位');
+INSERT INTO `tb_statistics_user` VALUES ('16', 'will', '13983597798', '1111111', '2018-05-25 13:39:40', '1', '广告位');
+INSERT INTO `tb_statistics_user` VALUES ('17', 'will', '13983587798', '1111111', '2018-05-25 13:39:50', '1', '广告位');
+INSERT INTO `tb_statistics_user` VALUES ('18', 'will', '13983685955', '2221111', '2018-05-25 13:58:21', '8', '品牌');
+INSERT INTO `tb_statistics_user` VALUES ('19', 'hill', '13566888888', '11112221', '2018-05-25 14:11:17', '1', null);
+INSERT INTO `tb_statistics_user` VALUES ('20', 'hieww', '13888888888', '1221111', '2018-05-25 14:13:15', '1', null);
+INSERT INTO `tb_statistics_user` VALUES ('21', 'hilleqqw', '13986555556', '22222222', '2018-05-25 14:13:49', '1', null);
+INSERT INTO `tb_statistics_user` VALUES ('22', 'hilleqqw', '13986555444', '22222222', '2018-05-25 14:14:02', '1', null);
+INSERT INTO `tb_statistics_user` VALUES ('23', 'hilleqqw', '13986555888', '22222222', '2018-05-25 14:14:52', '1', null);
+INSERT INTO `tb_statistics_user` VALUES ('24', 'hilleqqw', '13986566666', '22222222', '2018-05-25 14:16:08', '1', null);
+INSERT INTO `tb_statistics_user` VALUES ('25', 'wqqqw', '13956666666', '12222', '2018-05-25 14:17:46', '8', '品牌');
 
 -- ----------------------------
 -- Table structure for `tb_user`
