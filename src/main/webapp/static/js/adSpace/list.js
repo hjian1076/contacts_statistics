@@ -42,23 +42,38 @@ function initTable(){
          }
          ,{
             field:'operate',
-            title:'操作',
+            title:'操作1',
             align : 'center',
             valign : 'middle',
             formatter:function (value,row,index) {
 
                 return '<a onclick="createCode(+\'' +row.id+ '\')" class="btn btn-sm btn-primary">链接地址</a>';
             }
+        },{
+            field:'operate',
+            title:'操作2',
+            align : 'center',
+            valign : 'middle',
+            formatter:function (value,row,index) {
+
+                return '<button id="copyPath" onclick="copyCode(+\'' +row.id+ '\')"  >复制链接</button>';
+            }
         }
 
     ];
     tableUtil.initTable(table,url,columns);
 }
-function createCode(id) {
-        var path = webPath+"/getAdSpaceById?p="+id;
-       window.location.href = path;
+function copyCode(id) {
+     var path = webPath+"/getAdSpaceById?p="+id;
+    var clipboard = new Clipboard('#copyPath', {
+        text: function() {
+            return path;
+        }
+    });
+    clipboard.on('success', function() {
+        alert("复制成功！！！");
+    });
 }
-
 function queryParams(params) {
     var param = {
         limit : params.limit, // 页面大小

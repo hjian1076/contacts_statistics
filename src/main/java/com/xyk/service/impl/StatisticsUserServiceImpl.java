@@ -27,14 +27,23 @@ public class StatisticsUserServiceImpl implements StatisticsUserService {
     }
 
     /**
-     * 添加联系信息
+     * 添加联系信息(通过品牌)
      * @param staUser
      */
     @Override
     public void addStatisticsUser(StatisticsUser staUser) {
         Date createTime = new Date();
         staUser.setCreateTime(createTime);
+        staUser.setPage("品牌");
         statisticsUserDao.save(staUser);
+    }
+
+    @Override
+    public void addAdStaUser(StatisticsUser adStaUser) {
+        Date createTime = new Date();
+        adStaUser.setCreateTime(createTime);
+        adStaUser.setPage("广告位");
+        statisticsUserDao.save(adStaUser);
     }
 
     /**

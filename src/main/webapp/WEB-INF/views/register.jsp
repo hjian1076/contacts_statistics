@@ -86,15 +86,15 @@
         $scope.save = function(){
 
            if(isNull($scope.param.person)){
-                layer.msg("请输入联系人名字");
+               alert("请输入联系人名字");
                return false;
            }
             if(!validatemobile($scope.param.iphone)){
-                layer.msg(common.ERR_MSG.PHONE_ERROR_MSG);
+                alert(common.ERR_MSG.PHONE_ERROR_MSG);
                 return false;
             }
            if(isNull($scope.param.address)){
-                layer.msg("请输入联系人地址");
+               alert("请输入联系人地址");
                return false;
            }
            $('#subBtn')[0].disabled = true;
@@ -104,7 +104,7 @@
                     $('#subBtn')[0].disabled = false;
                     console.log(data);
                     if(data.code==0){
-                        layer.msg("注册成功！！！");
+                        alert("注册成功！！！");
                     }else{
                         layer.msg(data.msg);
                     }

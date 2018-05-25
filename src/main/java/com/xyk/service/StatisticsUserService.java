@@ -19,6 +19,11 @@ public interface StatisticsUserService {
      */
     void addStatisticsUser (StatisticsUser staUser);
 
+    /**
+     *
+     *添加联系人信息(广告位)
+     */
+    void addAdStaUser(StatisticsUser adStaUser);
     //验证user的唯一性
     void validateStaUserUnique(StatisticsUser staUser) throws UserRepeatException;
 }

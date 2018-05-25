@@ -28,6 +28,17 @@ public class StatisticsUser {
     @Basic
     @Column(name = "pf_id")
     private int pfId;//平台ID
+    @Column(name = "page")
+    private String page;
+
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
+    }
+
     @Transient
     private String platformName;//平台名称
     //    public Date getBirthDate() {

@@ -28,7 +28,9 @@ public class AdSpaceController extends BaseController{
     @Autowired
     AdSpaceDao adSpaceDao;
     @RequestMapping("/adSpaceList")
-    public String adSpaceList(){
+    public String adSpaceList(Model model){
+        String path = "getAdSpaceById/p=";
+        model.addAttribute("path",path);
         return "/admin/adSpace/list";
     }
 

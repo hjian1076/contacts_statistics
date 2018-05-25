@@ -106,7 +106,7 @@ public class LoginController extends BaseController{
         staUser.setPerson(person);
         staUser.setAddress(address);
         staUser.setPfId(pid);
-        statisticsUserService.addStatisticsUser(staUser);
+        statisticsUserService.addAdStaUser(staUser);
         AdSpace adSpace = adSpaceDao.findAdSpaceById(pid);
         if(adSpace==null){
             //跳转到错误页面

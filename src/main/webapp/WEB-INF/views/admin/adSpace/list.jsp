@@ -47,8 +47,8 @@
     </div>
 
     <jsp:include page="/template/list_tail.jsp" />
-    <script src="<%=basePath%>static/js/jquery/qrcode/qrcode.js"></script>
     <script src="<%=basePath%>static/js/adSpace/list.js?rand=<%=rand%>"></script>
+    <script src="<%=basePath%>static/js/clipboard.min.js"></script>
 </body>
 
     <script>
@@ -60,7 +60,6 @@
         function closeWin(){
             layer.closeAll('iframe'); //关闭所有的iframe层
         }
-
         //关闭iframe窗口刷新列表
         function closeWinAndFlush(){
             closeWin();
